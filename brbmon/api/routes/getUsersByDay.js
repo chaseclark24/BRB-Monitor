@@ -1,5 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const {
+    dbLocation
+} = require('./config.json');
 
 
 
@@ -8,7 +11,7 @@ router.get("/", function(req, res, next) {
 	const sqlite3 = require('sqlite3').verbose();
 
 	// open the database
-	let db = new sqlite3.Database('./bt.db');
+	let db = new sqlite3.Database(dbLocation);
 
 	let sql = `	select 
 				(case substr(timestamp, 9,3)

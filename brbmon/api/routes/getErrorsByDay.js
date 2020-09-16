@@ -1,5 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const {
+    dbLocation
+} = require('./config.json');
 
 router.get("/", function(req, res, next) {
 	const sqlite3 = require('sqlite3').verbose();
@@ -11,7 +14,7 @@ var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
 console.log(mydate.toDateString());
 
 	// open the database
-	let db = new sqlite3.Database('./bt.db');
+	let db = new sqlite3.Database(dbLocation);
 
 	let sql = `	select 
 				(case substr(timestamp, 9,3)
